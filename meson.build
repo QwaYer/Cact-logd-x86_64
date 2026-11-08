@@ -2,8 +2,8 @@
 # Cact logd — Meson build system
 # ==============================================================================
 #
-#   meson setup build-meson --cross-file cross/i686-cact-clang.ini \
-#       -Dcactlib=../CactLibc-x86_32
+#   meson setup build-meson --cross-file cross/x86_64-cact-clang.ini \
+#       -Dcactlib=../CactLibc-x86_64
 #   ninja -C build-meson            # build-meson/logd
 #   ninja -C build-meson install    # copy into -Dlr_sbin
 #
@@ -57,7 +57,7 @@ logd_lib = static_library('logd', 'main.c', c_args: c_args)
 logd = custom_target('logd',
   output: 'logd',
   input: logd_lib,
-  command: [ld, '-m', 'elf_i386', '-pie', '--dynamic-linker=/lib/ld.so',
+  command: [ld, '-m', 'elf_x86_64', '-pie', '--dynamic-linker=/lib/ld.so',
             '--hash-style=both', '-nostdlib', '--gc-sections',
             '-T', src_root / 'link.ld', '-o', '@OUTPUT@',
             start_o,
